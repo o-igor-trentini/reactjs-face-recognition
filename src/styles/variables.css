@@ -1,0 +1,15 @@
+:root {
+    /* Cores */
+    --white: #FFF;
+    --background-color-default: #2A2A2A;
+    --color-primary: #0056B3;
+    --color-secodary: #007BFF;
+
+
+    /* Fonte */
+    --font-color: #FFF;
+    --font-family-mono: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+
+    /* Espaçamento */
+    --border-radius: 8px;
+}
