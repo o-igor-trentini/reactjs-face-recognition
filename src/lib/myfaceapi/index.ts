@@ -1,6 +1,6 @@
 import * as faceapi from "face-api.js";
 
-const MODEL_URL = '/vendor/models';
+const MODEL_URL = import.meta.env.BASE_URL + 'vendor/models';
 
 const showConfig: ShowProps = {
     detectionBox: true,
