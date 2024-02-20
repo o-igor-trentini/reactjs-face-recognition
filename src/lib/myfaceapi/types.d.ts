@@ -1,3 +1,9 @@
+interface ShowProps {
+    detectionBox: boolean;
+    faceLandmark: boolean;
+    expressions: boolean;
+}
+
 interface ElementsProps {
     video: HTMLVideoElement | null;
     canvas: HTMLCanvasElement | null;
@@ -10,14 +16,7 @@ interface DisplayProps {
     }
 }
 
-interface ShowProps {
-    detectionBox?: boolean;
-    faceLandmark?: boolean;
-    expressions?: boolean;
-}
-
 interface InitProps {
     elements: ElementsProps;
     display: DisplayProps;
-    show?: ShowProps;
 }

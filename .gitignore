@@ -10,3 +10,7 @@ buid
 # IDE
 .vscode
 .idea
+
+# Certificados
+localhost.pem
+localhost-key.pem
