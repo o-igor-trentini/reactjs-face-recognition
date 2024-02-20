@@ -88,7 +88,6 @@ export class MyFaceApi {
 
             this.play();
         } catch (err: unknown) {
-            alert('Não foi possível carregar os modelos, verifique no console!');
             console.log('### error', err);
         }
     }
