@@ -1,12 +1,12 @@
-import './App.css'
-import {useEffect, useRef, useState} from "react";
+import './App.css';
+import { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
-import {MyFaceApi} from './lib/myfaceapi'
-import {Input} from "./components/Input";
-import {Button} from "./components/Button";
+import { MyFaceApi } from './lib/myfaceapi';
+import { Input } from './components/Input';
+import { Button } from './components/Button';
 
 const videoConstraints = {
-    width: window.innerWidth - (window.innerWidth * (window.innerWidth > 1200 ? 0.8 : 0.2)),
+    width: window.innerWidth - window.innerWidth * (window.innerWidth > 1200 ? 0.8 : 0.2),
     height: 600,
     facingMode: 'user',
 };
@@ -22,9 +22,7 @@ function App() {
         setCanvasClassNames((state) => {
             const newState = [...state];
 
-            if (newState.includes(className))
-                return newState.filter((item) => item !== className);
-
+            if (newState.includes(className)) return newState.filter((item) => item !== className);
 
             return [...state, className];
         });
@@ -35,7 +33,7 @@ function App() {
         const value = (document.getElementById('ipt-score-to-action') as HTMLInputElement)?.value;
 
         if (value === '') {
-            setIptValue('')
+            setIptValue('');
             myfaceapi.current?.switchScoreToActionConfig(null);
             return;
         }
@@ -46,7 +44,7 @@ function App() {
 
         setIptValue(minScore + '');
         myfaceapi.current?.switchScoreToActionConfig(minScore / 100);
-    }
+    };
 
     useEffect(() => {
         myfaceapi.current = new MyFaceApi({
@@ -54,8 +52,8 @@ function App() {
                 video: refWebcam.current?.video ?? null,
                 canvas: refCanvas.current,
             },
-            display: {size: {...videoConstraints}},
-            actions: {onAchieveScore: handleAchieveScore}
+            display: { size: { ...videoConstraints } },
+            actions: { onAchieveScore: handleAchieveScore },
         });
 
         myfaceapi.current.init().then();
@@ -71,14 +69,14 @@ function App() {
                     audio={false}
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
-                    style={{...videoConstraints}}
+                    style={{ ...videoConstraints }}
                 />
 
                 <canvas
                     ref={refCanvas}
                     id="overlay"
                     className={canvasClassNames.join(' ')}
-                    style={{...videoConstraints}}
+                    style={{ ...videoConstraints }}
                 />
             </div>
 
@@ -92,7 +90,7 @@ function App() {
                     onChange={handleChangeInputs}
                 />
 
-                <div/>
+                <div />
 
                 <Button onClick={() => handleSetCanvasClassName('show-background')}>
                     Mostrar background do canvas

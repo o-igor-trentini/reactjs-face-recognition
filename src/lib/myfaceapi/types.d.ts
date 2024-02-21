@@ -13,7 +13,7 @@ interface DisplayProps {
     size: {
         width: number;
         height: number;
-    }
+    };
 }
 
 interface ActionsProps {
