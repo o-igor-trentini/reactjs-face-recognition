@@ -3,7 +3,11 @@ import {useEffect, useRef, useState} from "react";
 import Webcam from 'react-webcam';
 import {MyFaceApi} from './lib/myfaceapi'
 
-const videoConstraints = {width: 600, height: 600, facingMode: "user"}
+const videoConstraints = {
+    width: window.innerWidth - (window.innerWidth * (window.innerWidth > 1200 ? 0.8 : 0.2)),
+    height: 600,
+    facingMode: 'user',
+};
 
 function App() {
     const [canvasClassNames, setCanvasClassNames] = useState<string[]>([]);
@@ -44,6 +48,7 @@ function App() {
                     audio={false}
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
+                    style={{...videoConstraints}}
                 />
 
                 <canvas

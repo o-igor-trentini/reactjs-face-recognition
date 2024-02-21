@@ -2,6 +2,8 @@
     min-width: 100vw;
     min-height: 100vh;
 
+    padding: 12px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,6 +23,10 @@
         border-radius: var(--border-radius);
     }
 
+    video {
+        object-fit: cover;
+    }
+
     canvas {
         position: absolute;
 
@@ -31,12 +37,17 @@
 }
 
 .options-wrapper {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 
+    @media screen and (max-width: 576px) {
+        display: flex;
+        flex-direction: column;
+    }
+
     button {
-        padding: 10px 20px;
+        padding: 12px 24px;
 
         font-family: var(--font-family-mono);
         color: var(--font-color);
