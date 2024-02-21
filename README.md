@@ -1,5 +1,15 @@
 # ReactJS Face Recognition #
 
+Este repositório demonstra como usar a biblioteca `face-api.js` para implementar reconhecimento facial em uma 
+aplicação ReactJS. A aplicação captura a imagem da webcam do usuário e detecta/identifica um rosto,
+podendo disparar alguma ação quando a detecção for maior que x%.
+
+> Como esta aplicação foi utilizada para uma POC pessoal, algumas configurações podem estar personalizadas para o meu
+> caso de uso.
+> 
+> Por exemplo: a biblioteca suporta detecção de múltiplos rostos, mas no meu caso é necessário a detecção de
+> apenas um rosto.
+
 ## Bibliotecas utilizadas ##
 
 - Webcam: [react-webcam](https://github.com/mozmorris/react-webcam)
