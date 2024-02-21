@@ -1,3 +1,11 @@
 @import url('styles/reset.css');
 @import url('styles/variables.css');
 @import url('styles/index.css');
+
+/* Components */
+@import url('components/Input/index.css');
+@import url('components/Button/index.css');
+
+body {
+    font-family: var(--font-family-mono);
+}

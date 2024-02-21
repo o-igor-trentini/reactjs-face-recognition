@@ -16,7 +16,12 @@ interface DisplayProps {
     }
 }
 
+interface ActionsProps {
+    onAchieveScore: () => void;
+}
+
 interface InitProps {
     elements: ElementsProps;
     display: DisplayProps;
+    actions: ActionsProps;
 }

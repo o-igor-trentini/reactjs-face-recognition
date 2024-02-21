@@ -8,18 +8,22 @@ const showConfig: ShowProps = {
     expressions: true,
 }
 
+let scoreToActionConfig: number | null = null;
+
 /**
  * Classe para inicializar e controlar a biblioteca "faceapi".
  */
 export class MyFaceApi {
     private readonly elements: ElementsProps;
     private readonly display: DisplayProps;
+    private actions: ActionsProps;
 
-    constructor({elements, display}: InitProps) {
+    constructor({elements, display, actions}: InitProps) {
         if (!elements || !display) throw new Error('configuração inválida');
 
         this.elements = elements;
         this.display = display;
+        this.actions = actions;
     }
 
     /**
@@ -28,6 +32,14 @@ export class MyFaceApi {
      */
     public switchShowConfigByKey = (key: keyof ShowProps): void => {
         showConfig[key] = !showConfig[key];
+    }
+
+    /**
+     * Altera a visualização do reconhecimento pela chave da configuração, atribuindo o valor contrário ao atual.
+     * @param score Chave da configuração.
+     */
+    public switchScoreToActionConfig = (score: number | null): void => {
+        scoreToActionConfig = score;
     }
 
     /**
@@ -62,6 +74,14 @@ export class MyFaceApi {
                 .withFaceExpressions();
 
             if (!detections) return;
+
+            if (
+                this.actions?.onAchieveScore
+                && detections
+                && scoreToActionConfig
+                && detections.detection.score > scoreToActionConfig
+            )
+                this.actions.onAchieveScore();
 
             const ctx = canvas.getContext('2d');
             const resizedDetections = faceapi.resizeResults(detections, this.display.size);

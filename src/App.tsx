@@ -2,6 +2,8 @@ import './App.css'
 import {useEffect, useRef, useState} from "react";
 import Webcam from 'react-webcam';
 import {MyFaceApi} from './lib/myfaceapi'
+import {Input} from "./components/Input";
+import {Button} from "./components/Button";
 
 const videoConstraints = {
     width: window.innerWidth - (window.innerWidth * (window.innerWidth > 1200 ? 0.8 : 0.2)),
@@ -11,6 +13,7 @@ const videoConstraints = {
 
 function App() {
     const [canvasClassNames, setCanvasClassNames] = useState<string[]>([]);
+    const [iptValue, setIptValue] = useState<string>('');
     const refWebcam = useRef<Webcam>(null);
     const refCanvas = useRef<HTMLCanvasElement>(null);
     const myfaceapi = useRef<MyFaceApi | null>(null);
@@ -26,6 +29,25 @@ function App() {
             return [...state, className];
         });
 
+    const handleAchieveScore = (): void => console.log('### atingiu a pontuação!');
+
+    const handleChangeInputs = (): void => {
+        const value = (document.getElementById('ipt-score-to-action') as HTMLInputElement)?.value;
+
+        if (value === '') {
+            setIptValue('')
+            myfaceapi.current?.switchScoreToActionConfig(null);
+            return;
+        }
+
+        const minScore = Number(value);
+
+        if (isNaN(minScore) || minScore < 0 || minScore > 100) return;
+
+        setIptValue(minScore + '');
+        myfaceapi.current?.switchScoreToActionConfig(minScore / 100);
+    }
+
     useEffect(() => {
         myfaceapi.current = new MyFaceApi({
             elements: {
@@ -33,6 +55,7 @@ function App() {
                 canvas: refCanvas.current,
             },
             display: {size: {...videoConstraints}},
+            actions: {onAchieveScore: handleAchieveScore}
         });
 
         myfaceapi.current.init().then();
@@ -60,24 +83,35 @@ function App() {
             </div>
 
             <div className="options-wrapper">
-                <button onClick={() => handleSetCanvasClassName('show-background')}>
+                <Input
+                    id="score-to-action"
+                    value={iptValue}
+                    label="(console) Pontuação para agir"
+                    placeholder="Digite a pontuação mínima"
+                    type="number"
+                    onChange={handleChangeInputs}
+                />
+
+                <div/>
+
+                <Button onClick={() => handleSetCanvasClassName('show-background')}>
                     Mostrar background do canvas
-                </button>
+                </Button>
 
-                <button onClick={() => myfaceapi.current?.switchShowConfigByKey('detectionBox')}>
+                <Button onClick={() => myfaceapi.current?.switchShowConfigByKey('detectionBox')}>
                     Mostrar caixa de detecção
-                </button>
+                </Button>
 
-                <button onClick={() => myfaceapi.current?.switchShowConfigByKey('faceLandmark')}>
+                <Button onClick={() => myfaceapi.current?.switchShowConfigByKey('faceLandmark')}>
                     Mostrar linhas do rosto
-                </button>
+                </Button>
 
-                <button onClick={() => myfaceapi.current?.switchShowConfigByKey('expressions')}>
+                <Button onClick={() => myfaceapi.current?.switchShowConfigByKey('expressions')}>
                     Mostrar expressões
-                </button>
+                </Button>
             </div>
         </div>
-    )
+    );
 }
 
 export default App;

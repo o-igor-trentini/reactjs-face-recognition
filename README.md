@@ -21,4 +21,4 @@
     ```
   
 > O projeto irá inicializar por padrão na porta 3000.
-> [Clique aqui](http://localhost:3000) para abrir o projeto no seu navegador padrão.
+> [Clique aqui](http://localhost:3000/reactjs-face-recognition/) para abrir o projeto no seu navegador padrão.

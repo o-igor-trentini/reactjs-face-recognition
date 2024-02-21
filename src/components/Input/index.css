@@ -1,0 +1,25 @@
+.ipt-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--font-color);
+    margin-bottom: var(--padding);
+}
+
+.ipt-field {
+    width: 100%;
+    padding: var(--padding);
+
+    font-size: 1rem;
+
+    background: var(--white);
+    border: 1px solid var(--white);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+}
+
+.ipt-field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-secodary);
+}
