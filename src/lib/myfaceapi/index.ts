@@ -72,12 +72,7 @@ export class MyFaceApi {
 
             if (!detections) return;
 
-            if (
-                this.actions?.onAchieveScore &&
-                detections &&
-                scoreToActionConfig &&
-                detections.detection.score > scoreToActionConfig
-            )
+            if (detections && scoreToActionConfig && detections.detection.score > scoreToActionConfig)
                 this.actions.onAchieveScore();
 
             const ctx = canvas.getContext('2d');
